@@ -26,7 +26,8 @@ func perform(actor, delta) -> bool:
 	if closest_cover == null:
 		return false
 
-	if closest_cover.position.distance_to(actor.position) < 1:
+	#if closest_cover.position.distance_to(actor.position) < 1:
+	if closest_cover.position.distance_to(actor.position) < 5:
 		return true
 
 	actor.move_to(actor.position.direction_to(closest_cover.position), delta)

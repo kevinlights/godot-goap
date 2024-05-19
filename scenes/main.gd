@@ -63,8 +63,7 @@ func _on_game_timer_timeout():
 
 func gen_mushroom():
 	var mushroom = mushroom_scn.instantiate()
-	randomize()
-	var pos = Vector2(randi() % 445 + 5, randi() % 245 + 5) # [5,5] -> [450,250]
+	var pos = WorldState.get_rand_pos()
 	mushroom.position = pos
 	mushroom.add_to_group("food")
 	print({"msg": "gen mushroom", "pos": pos})
@@ -74,8 +73,7 @@ func gen_mushroom():
 
 func gen_tree():
 	var tree = tree_scn.instantiate()
-	randomize()
-	var pos = Vector2(randi() % 445 + 5, randi() % 245 + 5) # [5,5] -> [450,250]
+	var pos = WorldState.get_rand_pos()
 	tree.position = pos
 	tree.add_to_group("tree")
 	print({"msg": "gen tree", "pos": pos})

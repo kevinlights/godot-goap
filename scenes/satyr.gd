@@ -71,6 +71,7 @@ func move_to(direction, delta):
 
   # warning-ignore:return_value_discarded
 	move_and_collide(direction * delta * 100)
+	#move_and_slide()
 
 
 
@@ -101,15 +102,21 @@ func calm_down():
 
 	if $calm_down_timer.is_stopped():
 		$calm_down_timer.start()
-
+	if $calm_down_timer.time_left >= 1:
+		$labels/labels/afraid_label.text = "Afraid " + str(round($calm_down_timer.time_left))
 	return false
 
 
 func _on_detection_radius_body_entered(body):
 	# troll 进入区域，导致 frightened
 	if body.is_in_group("troll"):
+		print("troll is detected")
 		#WorldState.set_state("is_frightened", true)
 		set_state("is_frightened", true)
+	if body.is_in_group("player"): # 有其他 players，随机移动到其他位置
+		print("other player is detected")
+		#var pos = WorldState.get_rand_pos()
+		#move_to(position.direction_to(pos), 1)
 
 
 func _on_calm_down_timer_timeout():

@@ -28,8 +28,9 @@ func _process(delta):
 
 
 func _pick_random_position():
-	randomize()
-	_target = Vector2(randi() % 445 + 5, randi() % 245 + 5) # [5,5] -> [450,250]
+	#randomize()
+	#_target = Vector2(randi() % 445 + 5, randi() % 245 + 5) # [5,5] -> [450,250]
+	_target = WorldState.get_rand_pos()
 
 # 计时停止时，重新随机选取位置并处理逻辑
 func _on_rest_timer_timeout():

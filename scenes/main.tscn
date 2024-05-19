@@ -4378,10 +4378,10 @@ nutrition = 10
 position = Vector2(187, 251)
 
 [node name="satyr" parent="." instance=ExtResource("4")]
-position = Vector2(111, 33)
+position = Vector2(70, 70)
 
 [node name="satyr2" parent="." instance=ExtResource("4")]
-position = Vector2(400, 146)
+position = Vector2(293, 153)
 
 [node name="troll" parent="." instance=ExtResource("3")]
 position = Vector2(72, 33)
@@ -4405,10 +4405,12 @@ theme_override_constants/margin_left = 5
 layout_mode = 2
 
 [node name="hunger_label" type="Label" parent="HUD/VBoxContainer/MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Hunger"
 
 [node name="hunger" type="ProgressBar" parent="HUD/VBoxContainer/MarginContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -4446,6 +4448,7 @@ size_flags_vertical = 0
 
 [node name="TextEdit" type="TextEdit" parent="HUD/console_container" groups=["console"]]
 process_mode = 3
+visible = false
 modulate = Color(1, 1, 1, 0.752941)
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2

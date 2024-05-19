@@ -130,7 +130,7 @@ shape = SubResource("14")
 
 [node name="detection_radius" type="Area2D" parent="."]
 position = Vector2(0, -7)
-collision_mask = 2
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection_radius"]
 shape = SubResource("15")
@@ -154,11 +154,12 @@ alignment = 2
 
 [node name="hungry_label" type="Label" parent="labels/labels"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Hungry"
 
 [node name="afraid_label" type="Label" parent="labels/labels"]
-visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Afraid"
 
 [connection signal="body_entered" from="detection_radius" to="." method="_on_detection_radius_body_entered"]
