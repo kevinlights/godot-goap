@@ -20,6 +20,7 @@ func _ready():
   # dynamically. Depending on your use case you might want to
   # have a way to define different goal priorities depending on
   # npc.
+	# 设置代理并初始化目标列表
 	var agent = GoapAgent.new()
 	agent.init(self, [
 		KeepFirepitBurningGoal.new(),
@@ -32,6 +33,7 @@ func _ready():
 
 
 func _process(_delta):
+	# 状态显示条件， huger > 50 时显示饥饿状态
 	$labels/labels/afraid_label.visible = WorldState.get_state("is_frightened", false)
 	$labels/labels/hungry_label.visible = WorldState.get_state("hunger", 0) >= 50
 
@@ -89,9 +91,11 @@ func calm_down():
 
 
 func _on_detection_radius_body_entered(body):
+	# troll 进入区域，导致 frightened
 	if body.is_in_group("troll"):
 		WorldState.set_state("is_frightened", true)
 
 
 func _on_calm_down_timer_timeout():
+	# 冷静下来
 	WorldState.set_state("is_frightened", false)

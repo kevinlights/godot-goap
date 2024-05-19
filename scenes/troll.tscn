@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bnysn00thw3g2"]
 
-[ext_resource type="Texture2D" uid="uid://dg7jc6voq4lg3" path="res://sprites/troll_.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://d0ahncq0w3v8k" path="res://sprites/troll_.png" id="1"]
 [ext_resource type="Script" path="res://scenes/troll.gd" id="2"]
 
 [sub_resource type="AtlasTexture" id="1"]
@@ -84,7 +84,8 @@ script = ExtResource("2")
 texture_filter = 1
 position = Vector2(0, -12)
 sprite_frames = SubResource("9")
-animation = &"idle"
+animation = &"run"
+frame_progress = 0.398221
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)

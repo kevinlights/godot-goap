@@ -3,6 +3,7 @@
 #
 extends Node
 
+# action 基类
 class_name GoapAction
 
 

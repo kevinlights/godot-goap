@@ -14,6 +14,7 @@ extends Node
 var _action_planner =  GoapActionPlanner.new()
 
 func _ready():
+	# 初始化 action 列表
 	_action_planner.set_actions([
 		BuildFirepitAction.new(),
 		ChopTreeAction.new(),

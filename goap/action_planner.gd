@@ -24,7 +24,7 @@ func get_plan(goal: GoapGoal, blackboard = {}) -> Array:
 	print("Goal: %s" % goal.get_clazz())
 	WorldState.console_message("Goal: %s" % goal.get_clazz())
 	var desired_state = goal.get_desired_state().duplicate()
-
+	#　获取到目标的期望状态
 	if desired_state.is_empty():
 		return []
 
@@ -86,13 +86,14 @@ func _build_plans(step, blackboard):
   # checks if the blackboard contains data that can
   # satisfy the current state.
 	for s in step.state:
+		# 满足即删除对应状态
 		if state[s] == blackboard.get(s):
 			state.erase(s)
 
   # if the state is empty, it means this branch already
   # found the solution, so it doesn't need to look for
   # more actions
-	if state.is_empty():
+	if state.is_empty(): # 没有要满足的状态项了，即满足了全部的状态
 		return true
 
 	for action in _actions:
@@ -101,20 +102,20 @@ func _build_plans(step, blackboard):
 
 		var should_use_action = false
 		var effects = action.get_effects()
-		var desired_state = state.duplicate()
+		var desired_state = state.duplicate() # 有要满足的状态
 
 	# check if action should be used, i.e. it
 	# satisfies at least one condition from the
 	# desired state
 		for s in desired_state:
 			if desired_state[s] == effects.get(s):
-				desired_state.erase(s)
-				should_use_action = true
+				desired_state.erase(s) # 判断当前要执行的操作是否能满足期望状态，如果能满足，则将该状态移除
+				should_use_action = true # 要执行操作
 
 		if should_use_action:
 			# adds actions pre-conditions to the desired state
 			var preconditions = action.get_preconditions()
-			for p in preconditions:
+			for p in preconditions: # 前置条件是一些状态列表
 				desired_state[p] = preconditions[p]
 
 			var s = {
@@ -149,6 +150,7 @@ func _transform_tree_into_array(p, blackboard):
 		return plans
 
 	for c in p.children:
+		# 先递归获取所有子级计划的 cost 之和
 		for child_plan in _transform_tree_into_array(c, blackboard):
 			if p.action.has_method("get_cost"):
 				child_plan.actions.push_back(p.action)

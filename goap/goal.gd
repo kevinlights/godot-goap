@@ -3,6 +3,7 @@
 #
 extends Node
 
+# 目标基类，用于子类继承和覆盖
 class_name GoapGoal
 
 
