@@ -3,6 +3,8 @@ extends StaticBody2D
 
 var _hp = 3
 
+func _ready():
+	$AnimationPlayer.play("spawn")
 
 func chop():
 	# 间隔 1 秒后才能继续砍树

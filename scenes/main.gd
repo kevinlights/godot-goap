@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var _hunger_field = $HUD/VBoxContainer/MarginContainer/HBoxContainer/hunger
 var mushroom_scn = preload("res://scenes/mushroom.tscn")
+var tree_scn = preload("res://scenes/tree.tscn")
 
 var gameTime = 0
 
@@ -41,6 +42,10 @@ func _on_game_timer_timeout():
 	# 每隔 10 秒自动随机生成 mushroom
 	if gameTime % 10 == 0:
 		gen_mushroom()
+	# 每隔 100 秒生成 tree
+	if gameTime % 100 == 0:
+		gen_tree()
+
 
 func gen_mushroom():
 	var mushroom = mushroom_scn.instantiate()
@@ -48,5 +53,17 @@ func gen_mushroom():
 	var pos = Vector2(randi() % 445 + 5, randi() % 245 + 5) # [5,5] -> [450,250]
 	mushroom.position = pos
 	mushroom.add_to_group("food")
+	print({"msg": "gen mushroom", "pos": pos})
 	WorldState.console_message({"msg": "gen mushroom", "pos": pos})
 	add_child(mushroom)
+
+
+func gen_tree():
+	var tree = tree_scn.instantiate()
+	randomize()
+	var pos = Vector2(randi() % 445 + 5, randi() % 245 + 5) # [5,5] -> [450,250]
+	tree.position = pos
+	tree.add_to_group("tree")
+	print({"msg": "gen tree", "pos": pos})
+	WorldState.console_message({"msg": "gen tree", "pos": pos})
+	add_child(tree)

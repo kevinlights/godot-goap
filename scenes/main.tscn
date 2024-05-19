@@ -4378,10 +4378,7 @@ nutrition = 10
 position = Vector2(187, 251)
 
 [node name="satyr" parent="." instance=ExtResource("4")]
-position = Vector2(110, 36)
-
-[node name="satyr2" parent="." instance=ExtResource("4")]
-position = Vector2(398, 154)
+position = Vector2(208, 159)
 
 [node name="troll" parent="." instance=ExtResource("3")]
 position = Vector2(72, 33)

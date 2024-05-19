@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1xnqbmsxtk2j"]
+[gd_scene load_steps=8 format=3 uid="uid://b1xnqbmsxtk2j"]
 
 [ext_resource type="Texture2D" uid="uid://8itbradm7dis" path="res://sprites/forestDecoration_0.png" id="1"]
 [ext_resource type="Script" path="res://scenes/mushroom.gd" id="2"]
@@ -10,6 +10,43 @@ region = Rect2(129.383, 17.4272, 7.61745, 10.3949)
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(3.23322, 4.70181)
 
+[sub_resource type="Animation" id="Animation_i1774"]
+resource_name = "spawn"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.5, 0.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hbiva"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b727a"]
+_data = {
+"RESET": SubResource("Animation_hbiva"),
+"spawn": SubResource("Animation_i1774")
+}
+
 [node name="mushroom" type="StaticBody2D" groups=["food"]]
 collision_layer = 4
 collision_mask = 0
@@ -17,7 +54,13 @@ script = ExtResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+scale = Vector2(0.5, 0.5)
 texture = SubResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b727a")
+}
