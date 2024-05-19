@@ -14,6 +14,17 @@ extends CharacterBody2D
 var is_moving = false
 var is_attacking = false
 
+var _state = {}
+
+func get_state(state_name, default = null):
+	return _state.get(state_name, default)
+
+func set_state(state_name, value):
+	_state[state_name] = value
+
+func clear_state():
+	_state = {}
+
 func _ready():
   # Here is where I define which goals are available for this
   # npc. In this implementation, goals priority are calculated
@@ -34,8 +45,11 @@ func _ready():
 
 func _process(_delta):
 	# 状态显示条件， huger > 50 时显示饥饿状态
-	$labels/labels/afraid_label.visible = WorldState.get_state("is_frightened", false)
-	$labels/labels/hungry_label.visible = WorldState.get_state("hunger", 0) >= 50
+	$labels/labels/afraid_label.visible = get_state("is_frightened", false)
+	$labels/labels/hungry_label.text = "Hunger " + str(get_state("hunger", 0))
+	
+	#$labels/labels/afraid_label.visible = WorldState.get_state("is_frightened", false)
+	#$labels/labels/hungry_label.visible = WorldState.get_state("hunger", 0) >= 50
 
 	if is_attacking:
 		$body.play("attack")
@@ -81,7 +95,8 @@ func chop_tree(tree):
 
 
 func calm_down():
-	if WorldState.get_state("is_frightened") == false:
+	#if WorldState.get_state("is_frightened") == false:
+	if get_state("is_frightened") == false:
 		return true
 
 	if $calm_down_timer.is_stopped():
@@ -93,9 +108,11 @@ func calm_down():
 func _on_detection_radius_body_entered(body):
 	# troll 进入区域，导致 frightened
 	if body.is_in_group("troll"):
-		WorldState.set_state("is_frightened", true)
+		#WorldState.set_state("is_frightened", true)
+		set_state("is_frightened", true)
 
 
 func _on_calm_down_timer_timeout():
 	# 冷静下来
-	WorldState.set_state("is_frightened", false)
+	#WorldState.set_state("is_frightened", false)
+	set_state("is_frightened", false)

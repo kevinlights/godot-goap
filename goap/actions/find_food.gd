@@ -10,11 +10,11 @@ func get_cost(_blackboard) -> int:
 	return 1
 
 
-func get_preconditions() -> Dictionary:
+func get_preconditions(actor) -> Dictionary:
 	return {}
 
 
-func get_effects() -> Dictionary:
+func get_effects(actor) -> Dictionary:
 	return {
 		"is_hungry": false
 	}
@@ -27,7 +27,8 @@ func perform(actor, delta) -> bool:
 		return false
 
 	if closest_food.position.distance_to(actor.position) < 5:
-		WorldState.set_state("hunger", WorldState.get_state("hunger") - closest_food.nutrition)
+		# WorldState.set_state("hunger", WorldState.get_state("hunger") - closest_food.nutrition)
+		actor.set_state("hunger", actor.get_state("hunger") - closest_food.nutrition)
 		closest_food.queue_free()
 		return true
 

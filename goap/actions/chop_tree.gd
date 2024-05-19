@@ -5,7 +5,7 @@ class_name ChopTreeAction
 func get_clazz(): return "ChopTreeAction"
 
 
-func is_valid() -> bool:
+func is_valid(actor) -> bool:
 	return WorldState.get_elements("tree").size() > 0
 
 
@@ -16,11 +16,11 @@ func get_cost(blackboard) -> int:
 	return 3
 
 
-func get_preconditions() -> Dictionary:
+func get_preconditions(actor) -> Dictionary:
 	return {}
 
 
-func get_effects() -> Dictionary:
+func get_effects(actor) -> Dictionary:
 	return {
 		"has_wood": true
 	}
@@ -32,7 +32,8 @@ func perform(actor, delta) -> bool:
 	if _closest_tree:
 		if _closest_tree.position.distance_to(actor.position) < 10:
 				if actor.chop_tree(_closest_tree):
-					WorldState.set_state("has_wood", true)
+					# WorldState.set_state("has_wood", true)
+					actor.set_state("has_wood", true)
 					return true
 				return false
 		else:

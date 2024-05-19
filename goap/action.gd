@@ -14,7 +14,7 @@ class_name GoapAction
 # also be used during execution to abort the plan in case the world state
 # does not allow this action anymore.
 #
-func is_valid() -> bool:
+func is_valid(_actor) -> bool:
 	return true
 
 
@@ -34,7 +34,7 @@ func get_cost(_blackboard) -> int:
 #   "has_wood": true
 # }
 #
-func get_preconditions() -> Dictionary:
+func get_preconditions(_actor) -> Dictionary:
 	return {}
 
 
@@ -45,7 +45,7 @@ func get_preconditions() -> Dictionary:
 # {
 #   "has_wood": true
 # }
-func get_effects() -> Dictionary:
+func get_effects(_actor) -> Dictionary:
 	return {}
 
 

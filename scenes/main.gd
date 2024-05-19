@@ -6,17 +6,31 @@ var mushroom_scn = preload("res://scenes/mushroom.tscn")
 var tree_scn = preload("res://scenes/tree.tscn")
 
 var gameTime = 0
+var players = []
+
+func _ready():
+	for node in get_tree().get_nodes_in_group("player"):
+		players.append(node)
+	print("player size: ", players.size())
 
 func _on_hanger_timer_timeout():
-	_hunger_field.value = WorldState.get_state("hunger", 0)
-	if _hunger_field.value < 100:
-		_hunger_field.value += 2
-
-	WorldState.set_state("hunger", _hunger_field.value)
+	for p in players:
+		var v = p.get_state("hunger", 0)
+		if v < 100:
+			v += 2
+		p.set_state("hunger", v)
+	
+	#_hunger_field.value = WorldState.get_state("hunger", 0)
+	#if _hunger_field.value < 100:
+		#_hunger_field.value += 2
+#
+	#WorldState.set_state("hunger", _hunger_field.value)
 
 
 func _on_reload_pressed():
-	WorldState.clear_state()
+	for p in players:
+		p.clear_state()
+	#WorldState.clear_state()
 	# warning-ignore:return_value_discarded
 	self.get_tree().reload_current_scene()
 

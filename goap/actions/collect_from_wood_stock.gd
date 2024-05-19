@@ -5,7 +5,7 @@ class_name CollectFromWoodStockAction
 func get_clazz(): return "CollectFromWoodStockAction"
 
 
-func is_valid() -> bool:
+func is_valid(actor) -> bool:
 	return WorldState.get_elements("wood_stock").size() > 0
 
 
@@ -16,11 +16,11 @@ func get_cost(blackboard) -> int:
 	return 5
 
 
-func get_preconditions() -> Dictionary:
+func get_preconditions(actor) -> Dictionary:
 	return {}
 
 
-func get_effects() -> Dictionary:
+func get_effects(actor) -> Dictionary:
 	return {
 		"has_wood": true,
 	}
@@ -32,7 +32,8 @@ func perform(actor, delta) -> bool:
 	if closest_stock:
 		if closest_stock.position.distance_to(actor.position) < 10:
 			closest_stock.queue_free()
-			WorldState.set_state("has_wood", true)
+			# WorldState.set_state("has_wood", true)
+			actor.set_state("has_wood", true)
 			return true
 		else:
 			actor.move_to(actor.position.direction_to(closest_stock.position), delta)

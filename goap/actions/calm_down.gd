@@ -10,13 +10,13 @@ func get_cost(_blackboard) -> int:
 	return 1
 
 
-func get_preconditions() -> Dictionary:
+func get_preconditions(actor) -> Dictionary:
 	return {
 		"protected": true
 	}
 
 
-func get_effects() -> Dictionary:
+func get_effects(actor) -> Dictionary:
 	return {
 		"is_frightened": false
 	}
